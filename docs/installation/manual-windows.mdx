@@ -1,0 +1,184 @@
+---
+sidebar_position: 4
+title: Manual Install — Windows
+---
+
+# Manual Install — Windows
+
+This method walks you through each step manually. Only use this if the Easy method didn't work, or if you want more control over the setup.
+
+---
+
+## What You Need
+
+- [Python 3](https://www.python.org/downloads/) installed — check **"Add Python to PATH"** during install
+- [Node.js](https://nodejs.org/en/download) installed
+- A [Google Gemini API key](https://aistudio.google.com/app/apikey) (free)
+- The repo downloaded and unzipped
+
+---
+
+## Step 1 — Download the repo
+
+Go to the [GitHub page](https://github.com/TSSS-org/edpuzzle-answers-selfhost) and click the green **Code** button, then **Download ZIP**.
+
+Unzip the file and open PowerShell in that folder:
+
+```powershell
+cd path\to\edpuzzle-answers-selfhost
+```
+
+:::tip How to check you're in the right place
+Run `dir` and you should see files like `setup.py`, `package.json`, and a `server` folder.
+:::
+
+---
+
+## Step 2 — Set up the config file
+
+Navigate into `server\config`:
+
+```powershell
+cd server\config
+```
+
+Copy `default.json` to a new file called `config.json`:
+
+```powershell
+copy default.json config.json
+```
+
+Now open `config.json` in a text editor (Notepad works fine). Find this line:
+
+```json
+"key": "GEMINI_KEY",
+```
+
+Replace `GEMINI_KEY` with your actual Google Gemini API key. The line should end up looking like this (with your real key):
+
+```json
+"key": "AIzaSy...",
+```
+
+Save the file, then go back to the root of the repo:
+
+```powershell
+cd ..\..
+```
+
+---
+
+## Step 3 — Create a Python virtual environment
+
+```powershell
+python -m venv .venv
+```
+
+Then activate it:
+
+```powershell
+.venv\Scripts\activate
+```
+
+:::info What is a virtual environment?
+It's an isolated Python environment just for this project, so the packages installed here don't mess with anything else on your system. You'll know it's active when you see `(.venv)` at the start of your terminal prompt.
+:::
+
+:::warning
+All the following commands need to be run with the virtual environment active. If you close your terminal and come back later, you'll need to run `.venv\Scripts\activate` again before starting the server.
+
+If you get an error saying scripts are disabled, run this first:
+```powershell
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+:::
+
+---
+
+## Step 4 — Install dependencies
+
+Install Node.js packages:
+
+```powershell
+npm i
+```
+
+Install Python packages:
+
+```powershell
+pip install -r requirements.txt
+```
+
+:::warning
+If you see an error saying something like "this may break system packages", you're probably not inside the virtual environment. Go back to Step 3 and make sure you activated it.
+:::
+
+---
+
+## Step 5 — Install Playwright
+
+```powershell
+playwright install chromium
+```
+
+This downloads the browser that the tool uses in the background.
+
+---
+
+## Step 6 — Build the app
+
+```powershell
+npm run build:prod
+```
+
+**Expected output:** A bunch of webpack build messages. It should end with something like `✓ compiled successfully`.
+
+---
+
+## Step 7 — Start the server
+
+```powershell
+python server/main.py
+```
+
+A Chrome window will open automatically to the Edpuzzle login page.
+
+---
+
+## Step 8 — Sign in with a teacher account
+
+On the login page that opens:
+
+1. Click **I'm a teacher**
+2. Sign in or create a teacher account
+
+:::info Why a teacher account?
+The tool needs a teacher token to access answer data. A regular student account won't work.
+:::
+
+After signing in, the window will close itself after about 3 seconds. That means it worked.
+
+---
+
+## Step 9 — Open the tool
+
+Go to [http://localhost:8080](http://localhost:8080) in your browser. You should see the Edpuzzle Answers interface.
+
+**You're done!** Head to the [Usage Guide](../usage) to learn how to use it.
+
+---
+
+## Starting the server again later
+
+You don't need to redo all these steps every time. Just open PowerShell in the repo folder, activate the venv, and start the server:
+
+```powershell
+.venv\Scripts\activate
+python server/main.py
+```
+
+---
+
+## Something went wrong?
+
+Check the [Troubleshooting](../troubleshooting) page or the [FAQ](../faq).

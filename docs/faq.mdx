@@ -1,0 +1,63 @@
+---
+sidebar_position: 6
+title: FAQ
+---
+
+# FAQ
+
+---
+
+### Do I need to set up the server every time I want to use it?
+
+No. You only run the full setup once. After that, you just need to start the server each time:
+
+- **Linux/macOS:** `source .venv/bin/activate` then `python3 server/main.py`
+- **Windows:** `.venv\Scripts\activate` then `python server/main.py`
+
+---
+
+### Why do I need a teacher account?
+
+Edpuzzle stores answer data in a way that requires a teacher token to access. The tool uses your teacher account to get that token. It doesn't matter if it's a real teacher account or one you just made — it just needs to be marked as a teacher.
+
+---
+
+### Is my teacher account at risk?
+
+The token is only used locally on your machine to fetch answer data. It's not sent anywhere else. That said, using a throwaway account you made just for this is always the safer option.
+
+---
+
+### Does this work for all Edpuzzle assignments?
+
+It works for most assignments directly on edpuzzle.com, and also for Edpuzzles embedded in Canvas and Schoology. It doesn't currently work for most other third-party embeds.
+
+---
+
+### The Gemini API key — does it cost money?
+
+Google provides a free tier for Gemini which is more than enough for personal use. You can get a free key at [aistudio.google.com](https://aistudio.google.com/app/apikey). You only need it if you want AI-powered answers for open-ended questions — it's optional otherwise.
+
+---
+
+### Can I run this on a server so other people can use it?
+
+Yes, but you'll need to set up a domain and HTTPS. The original project's README has some notes on this. Make sure you set `behind_proxy: true` in your config if you're using Nginx or similar.
+
+---
+
+### The server was working before and now it's not
+
+A few things to check:
+
+- Is the virtual environment activated? (look for `(.venv)` in your prompt)
+- Did you sign in with the teacher account when the Chrome window opened?
+- Try stopping the server and starting it again
+
+See the [Troubleshooting](./troubleshooting) page for more specific issues.
+
+---
+
+### Where can I get help if none of this works?
+
+Open an issue on the [GitHub repo](https://github.com/TSSS-org/edpuzzle-answers-selfhost/issues) with a description of what's happening and what error messages you're seeing.

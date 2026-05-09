@@ -1,0 +1,69 @@
+---
+sidebar_position: 4
+title: Configuration Reference
+---
+
+# Configuration Reference
+
+The config file is located at `server/config/config.json`. If it doesn't exist yet, copy `default.json` in the same folder and rename the copy to `config.json`.
+
+---
+
+## Gemini (AI)
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `gemini.enabled` | boolean | Set to `true` to enable AI-powered open-ended question answering |
+| `gemini.key` | string | Your Google Gemini API key. Get one free at [aistudio.google.com](https://aistudio.google.com/app/apikey) |
+| `gemini.model` | string | Which Gemini model to use. Defaults to `gemini-pro` |
+
+---
+
+## Server
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `server_port` | number | The port the server runs on. Default is `8080`. Change this if something else is already using port 8080 |
+| `behind_proxy` | boolean | Set to `true` if you're running this behind a reverse proxy like Nginx. This makes IP rate limiting work correctly |
+| `gzip_responses` | boolean | Compress server responses. Slightly reduces bandwidth usage |
+
+---
+
+## Rate Limiting
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `rate_limits` | object | Controls how many requests can be made per time period for each AI service. Format follows [Flask-Limiter notation](https://flask-limiter.readthedocs.io/en/stable/configuration.html#rate-limit-string-notation) (e.g. `"10 per minute"`) |
+| `limiter_storage_uri` | string | Where rate limit data is stored. Use `"memory://"` if you don't want to set up a database |
+
+---
+
+## Development / Debugging
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `dev_mode` | boolean | Puts the server in debug mode — it will automatically restart when you save a file. Only use this if you're modifying the code |
+| `include_traceback` | boolean | Shows full error stack traces in the browser when something goes wrong. **Do not enable this on a public server** — it exposes your file paths |
+
+---
+
+## Example config.json
+
+```json
+{
+  "dev_mode": false,
+  "include_traceback": false,
+  "behind_proxy": false,
+  "gzip_responses": true,
+  "server_port": 8080,
+  "limiter_storage_uri": "memory://",
+  "gemini": {
+    "enabled": true,
+    "key": "YOUR_API_KEY_HERE",
+    "model": "gemini-pro"
+  },
+  "rate_limits": {
+    "gemini": "10 per minute"
+  }
+}
+```

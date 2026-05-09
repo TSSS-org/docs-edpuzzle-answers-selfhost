@@ -1,0 +1,106 @@
+---
+sidebar_position: 1
+title: Easy Install — Linux / macOS
+---
+
+# Easy Install — Linux / macOS
+
+This method runs a single script that handles the entire setup for you. This is the recommended way to get started.
+
+---
+
+## What You Need
+
+- [Python](https://www.python.org/downloads/) installed
+- [Node.js](https://nodejs.org/en/download) installed
+- A [Google Gemini API key](https://aistudio.google.com/app/apikey) (free)
+- The repo downloaded and unzipped
+
+---
+
+## Step 1 — Download the repo
+
+Go to the [GitHub page](https://github.com/TSSS-org/edpuzzle-answers-selfhost) and click the green **Code** button, then **Download ZIP**.
+
+Unzip the file somewhere easy to find, like your Desktop or Documents folder.
+
+---
+
+## Step 2 — Open a terminal in the repo folder
+
+Open your terminal app. Then navigate into the folder you just unzipped:
+
+```bash
+cd path/to/edpuzzle-answers-selfhost
+```
+
+For example if you unzipped it to your Desktop:
+
+```bash
+cd ~/Desktop/edpuzzle-answers-selfhost
+```
+
+:::tip How to check you're in the right place
+Run `ls` and you should see files like `setup.py`, `package.json`, and a `server` folder. If you don't see those, you're in the wrong directory.
+:::
+
+---
+
+## Step 3 — Run the setup script
+
+```bash
+python3 setup.py
+```
+
+:::warning
+Do **not** paste the contents of `setup.py` into your terminal. You need to run the file using the command above.
+:::
+
+The script will automatically install all dependencies, set everything up, and prompt you to enter your Gemini API key.
+
+:::info
+You DONT have to give it a gemini api key but without the api key it wong generate answers for open ended questions
+:::
+
+**Expected output:** You'll see a bunch of install messages scroll by. This is normal. The script will tell you when it's done.
+
+---
+
+## Step 4 — Start the server
+
+Once setup finishes, start the server with:
+
+```bash
+python3 server/main.py
+```
+
+A Chrome window will open automatically to the Edpuzzle login page.
+
+---
+
+## Step 5 — Sign in with a teacher account
+
+On the login page that opens:
+
+1. Click **I'm a teacher**
+2. Sign in or create a teacher account
+
+:::info Why a teacher account?
+The tool needs a teacher token to access answer data. A regular student account won't work.
+:::
+
+After signing in, the window will close itself after about 3 seconds. That means it worked.
+
+---
+
+## Step 6 — Open the tool
+
+Go to [http://localhost:8080](http://localhost:8080) in your browser. You should see the Edpuzzle Answers interface.
+
+**You're done!** Head to the [Usage Guide](../usage) to learn how to use it.
+
+---
+
+## Something went wrong?
+
+Check the [Troubleshooting](../troubleshooting) page or the [FAQ](../faq).

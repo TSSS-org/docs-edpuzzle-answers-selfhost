@@ -1,0 +1,116 @@
+---
+sidebar_position: 5
+title: Troubleshooting
+---
+
+# Troubleshooting
+
+---
+
+## Setup issues
+
+### "python3: command not found" or "python: command not found"
+
+Python isn't installed or isn't on your PATH.
+
+- Download and install it from [python.org](https://www.python.org/downloads/)
+- **Windows:** Make sure you checked **"Add Python to PATH"** during installation. If you already installed it without doing this, uninstall and reinstall with that option checked.
+- **Linux/macOS:** Try `python` instead of `python3` or vice versa.
+
+---
+
+### "npm: command not found"
+
+Node.js isn't installed. Download it from [nodejs.org](https://nodejs.org/en/download), then close and reopen your terminal.
+
+---
+
+### pip install says "this may break system packages"
+
+You're not inside the virtual environment. Run the activate command first:
+
+- **Linux/macOS:** `source .venv/bin/activate`
+- **Windows:** `.venv\Scripts\activate`
+
+You should see `(.venv)` at the start of your prompt. Then try the pip command again.
+
+---
+
+### Scripts are disabled on Windows
+
+Run this in PowerShell first:
+
+```powershell
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+Type `Y` when prompted, then try again.
+
+---
+
+### The Chrome window opened but closed immediately without me signing in
+
+The window closes after sign-in is detected. If it's closing before you get a chance to sign in, try starting the server again — it sometimes happens if the page loads unusually fast.
+
+---
+
+## Server issues
+
+### Port 8080 is already in use
+
+Something else on your computer is using port 8080. You can change the port the server uses in `server/config/config.json`:
+
+```json
+"server_port": 8081
+```
+
+Then access the tool at [http://localhost:8081](http://localhost:8081) instead.
+
+---
+
+### The server starts but I get an error about the teacher token
+
+The sign-in step didn't complete properly. Stop the server (`Ctrl+C`), start it again, and make sure you:
+
+1. Click **I'm a teacher** on the login page
+2. Fully complete the sign-in before the window closes itself
+
+---
+
+### "ModuleNotFoundError" when starting the server
+
+A Python dependency didn't install correctly. Make sure your virtual environment is active, then run:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Tool issues
+
+### Answers aren't showing up
+
+- Make sure the URL is in the format `https://edpuzzle.com/assignments/{id}/watch`
+- The tool doesn't work for most third-party embedded Edpuzzles (except Canvas and Schoology)
+- Try refreshing the assignment page and running the bookmarklet again
+
+---
+
+### Open-ended AI answers aren't working
+
+- Make sure `gemini.enabled` is set to `true` in your `config.json`
+- Check that your Gemini API key is correct and hasn't expired
+- Make sure you have remaining quota on your Gemini API key (check at [aistudio.google.com](https://aistudio.google.com))
+
+---
+
+### The bookmarklet isn't working
+
+- Make sure your server is actually running at [http://localhost:8080](http://localhost:8080) before clicking the bookmarklet
+- Allow popups from edpuzzle.com in your browser settings
+- Some browsers block the bookmarklet due to Content Security Policy. Install the CSP bypass extension: [Chrome/Edge](https://chromewebstore.google.com/detail/disable-content-security/ieelmcmcagommplceebfedjlakkhpden) or [Firefox](https://addons.mozilla.org/en-US/firefox/addon/disable-csp-for-a-minute/)
+
+---
+
+Still stuck? Open an issue on the [GitHub repo](https://github.com/TSSS-org/edpuzzle-answers-selfhost/issues).

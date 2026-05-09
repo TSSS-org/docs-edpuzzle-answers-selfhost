@@ -1,0 +1,124 @@
+---
+sidebar_position: 2
+title: Easy Install — Windows
+---
+
+# Easy Install — Windows
+
+This method runs a single script that handles the entire setup for you. This is the recommended way to get started.
+
+---
+
+## What You Need
+
+- [Python 3](https://www.python.org/downloads/) installed
+- [Node.js](https://nodejs.org/en/download) installed
+- A [Google Gemini API key](https://aistudio.google.com/app/apikey) (free)
+- The repo downloaded and unzipped
+
+:::warning Python on Windows
+When installing Python, make sure you check **"Add Python to PATH"** on the first screen of the installer. If you skip this, the commands below won't work.
+:::
+
+---
+
+## Step 1 — Download the repo
+
+Go to the [GitHub page](https://github.com/TSSS-org/edpuzzle-answers-selfhost) and click the green **Code** button, then **Download ZIP**.
+
+Unzip the file somewhere easy to find, like your Desktop or Downloads folder.
+
+---
+
+## Step 2 — Allow scripts to run (PowerShell)
+
+Open **PowerShell** (search for it in the Start menu) and run this command:
+
+```powershell
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+When prompted, type `Y` and press Enter. You only need to do this once.
+
+:::info What does this do?
+By default, Windows blocks scripts from running as a security measure. This command allows locally downloaded scripts to run on your account.
+:::
+
+---
+
+## Step 3 — Open a terminal in the repo folder
+
+In PowerShell, navigate to the folder you unzipped:
+
+```powershell
+cd path\to\edpuzzle-answers-selfhost
+```
+
+For example if you unzipped it to your Desktop:
+
+```powershell
+cd $env:USERPROFILE\Desktop\edpuzzle-answers-selfhost
+```
+
+:::tip How to check you're in the right place
+Run `dir` and you should see files like `setup.py`, `package.json`, and a `server` folder. If you don't see those, you're in the wrong folder.
+:::
+
+---
+
+## Step 4 — Run the setup script
+
+```powershell
+python setup.py
+```
+
+:::warning
+Do **not** paste the contents of `setup.py` into your terminal. You need to run the file using the command above.
+
+Also note: on Windows it's `python` not `python3`.
+:::
+
+The script will automatically install all dependencies, set everything up, and prompt you to enter your Gemini API key.
+
+**Expected output:** You'll see a bunch of install messages scroll by. This is normal. The script will tell you when it's done.
+
+---
+
+## Step 5 — Start the server
+
+Once setup finishes, start the server with:
+
+```powershell
+python server/main.py
+```
+
+A Chrome window will open automatically to the Edpuzzle login page.
+
+---
+
+## Step 6 — Sign in with a teacher account
+
+On the login page that opens:
+
+1. Click **I'm a teacher**
+2. Sign in or create a teacher account
+
+:::info Why a teacher account?
+The tool needs a teacher token to access answer data. A regular student account won't work.
+:::
+
+After signing in, the window will close itself after about 3 seconds. That means it worked.
+
+---
+
+## Step 7 — Open the tool
+
+Go to [http://localhost:8080](http://localhost:8080) in your browser. You should see the Edpuzzle Answers interface.
+
+**You're done!** Head to the [Usage Guide](../usage) to learn how to use it.
+
+---
+
+## Something went wrong?
+
+Check the [Troubleshooting](../troubleshooting) page or the [FAQ](../faq).

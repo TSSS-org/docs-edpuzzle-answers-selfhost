@@ -1,0 +1,96 @@
+---
+sidebar_position: 3
+title: Usage Guide
+---
+
+# Usage Guide
+
+This page assumes you've already installed the server. If you haven't, go to the [Installation](/docs/installation/easy-linux-mac) page first.
+
+---
+
+## Starting the server
+
+Every time you want to use the tool, you need to start the server first. Just run `start.py` from the root of the repo:
+
+**Linux / macOS:**
+```bash
+python3 start.py
+```
+
+**Windows:**
+```powershell
+python start.py
+```
+
+:::warning
+If you see an error saying the virtual environment wasn't found, you haven't run setup yet. Go to the [Installation](/docs/installation/easy-linux-mac) page and complete setup first.
+:::
+
+A Chrome window will open to the Edpuzzle login page. Sign in with your teacher account — the window will close itself after a few seconds once it's ready.
+
+Then go to [http://localhost:8080](http://localhost:8080).
+
+---
+
+## Getting answers for an assignment
+
+1. Go to [edpuzzle.com](https://edpuzzle.com) and open the assignment you want answers for
+2. Make sure the URL looks like: `https://edpuzzle.com/assignments/{id}/watch`
+3. Copy the URL
+4. Paste it into the tool at [http://localhost:8080](http://localhost:8080)
+5. Click the button to fetch answers
+
+The multiple choice answers will be displayed on screen.
+
+---
+
+## Features
+
+### Auto-answer
+Automatically fills in all the multiple choice answers for you. Click the auto-answer button after fetching the answers.
+
+### Open-ended question answering (AI)
+Uses Google Gemini to generate answers for free-response questions. This requires a valid Gemini API key in your config — see the [Configuration Reference](/docs/configuration) for setup.
+
+### Video skipper
+Lets you jump to any point in the video, including the end. Useful for skipping required watch time.
+
+### Video speed
+Change the playback speed of the video.
+
+### Prevent auto-pause
+Stops the video from pausing when you switch tabs.
+
+---
+
+## Using the bookmarklet
+
+Instead of copying and pasting the URL every time, you can set up the bookmarklet:
+
+1. Make sure your server is running at [http://localhost:8080](http://localhost:8080)
+2. Drag the bookmarklet button into your bookmarks bar (or right-click → bookmark link on Firefox)
+3. Now when you're on any Edpuzzle assignment page, just click the bookmark to launch the tool
+
+:::info
+The bookmarklet only works while your server is running. If the tool doesn't open, make sure you started the server with `start.py` first.
+:::
+
+---
+
+## Canvas and Schoology
+
+The tool also works for Edpuzzles embedded in Canvas and Schoology.
+
+**Canvas:**
+1. Navigate to the assignment on Canvas
+2. Click the bookmarklet — it will open the Edpuzzle in a new tab
+3. Click the bookmarklet again on the new tab to run the tool
+
+**Schoology:** Works the same way as Canvas.
+
+---
+
+## Stopping the server
+
+When you're done, go back to your terminal and press `Ctrl+C` to stop the server.
