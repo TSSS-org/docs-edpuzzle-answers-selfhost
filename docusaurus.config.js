@@ -70,7 +70,7 @@ const config = {
             items: [
               {
                 label: 'Installation',
-                to: '/docs/installation',
+                to: '/docs/',
               },
               {
                 label: 'Configuration',
